@@ -2,6 +2,7 @@ package com.codzunk.mathxy;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -24,16 +25,32 @@ public class MainActivity extends AppCompatActivity {
 
         Button evaluate = findViewById(R.id.btn_evaluate);
         evaluate.setOnClickListener(onClickListener);
+
+        editExpression.setOnEditorActionListener(onEditorActionListener);
     }
 
     private View.OnClickListener onClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            String expression = editExpression.getText().toString();
-            if (!expression.isEmpty()){
-                Expression e = new Expression(expression);
-                resultView.setText(String.format("%s", e.calculate()));
-            }
+            onEvaluate();
         }
     };
+
+    private TextView.OnEditorActionListener onEditorActionListener
+            = new TextView.OnEditorActionListener() {
+        @Override
+        public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+            onEvaluate();
+            return true;
+        }
+    };
+
+    private void onEvaluate(){
+        String expression = editExpression.getText().toString();
+        if (!expression.isEmpty()){
+            Expression e = new Expression(expression);
+            resultView.setText(String.format("%s", e.calculate()));
+        }
+    }
+
 }
