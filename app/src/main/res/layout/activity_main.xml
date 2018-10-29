@@ -50,7 +50,7 @@
                     android:background="@android:color/transparent"
                     android:gravity="top|start"
                     android:hint="@string/hint_enter_expression_here"
-                    android:inputType="textMultiLine|number"
+                    android:inputType="textMultiLine"
                     android:lines="8"
                     android:maxLines="10"
                     android:minLines="6"
